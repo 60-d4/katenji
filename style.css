@@ -1,0 +1,346 @@
+html {
+  scroll-behavior: smooth;
+}
+
+/*--------------------header--------------------*/
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.75rem 1rem;
+    position: fixed; /* 固定 */
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0));
+    backdrop-filter: blur(1px);
+
+    color: #ffffff;
+}
+header::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 0;
+  width: 90%;
+  height: 1px;
+  background-color: rgba(255,255,255);
+  pointer-events: none;
+}
+
+.menu-icon {
+  font-size: 2rem;
+  cursor: pointer;
+  user-select: none;
+  z-index: 1001;
+}
+
+/* --- メニューバー --- */
+.menu {
+    padding-top: 2.5rem;
+    position: fixed;
+    right: 0;
+    top: -250px; /* 初期は非表示（右に隠す） */
+    width: 150px;
+    background-color: #1111118f;
+    color: #fff;
+    transition: top 0.3s ease;
+    z-index: 1000;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* メニュー内のリンク */
+.menu ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  text-align: center;
+}
+
+.menu li {
+  margin: 20px 0;
+}
+.menu a {
+  color: #fff;
+  text-decoration: none;
+  font-size: 1rem;
+  transition: color 0.3s;
+}
+.menu.open {
+  top: 0;
+}
+
+.icon{
+    height: 35px;
+}
+
+/*--------------------全体設定（背景/配置）--------------------*/
+body{
+    margin: 0;
+    padding: 0;
+    position: relative;
+    overflow-x: hidden;
+
+    font-family: "Noto Sans JP", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", "Hiragino Kaku Gothic ProN", "Meiryo", sans-serif;
+}
+.main {
+    background: url("images/unreal_kosen.png");
+    background-size: cover;
+}
+.contents-1, .contents-2 {
+    max-width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    background-attachment: fixed;
+    background-position: center top;
+}
+.contents-1 {background-color: rgb(237, 237, 237);}
+.contents-2 {
+  background-image: url("images/bg-1.png");
+  background-repeat: repeat;        /* 横方向にタイル */
+  background-size: 600px auto;        /* タイル幅を固定（必要なら調整） */
+  background-attachment: scroll;      /* fixed を解除して安定させる */}
+
+.contents-1 section, .contents-2 section {
+    margin: 0 auto;
+    padding: 0;
+    width: 100%;
+    max-width: 820px; /* セクション内の最大幅（任意） */
+}
+.robot-arm, .line-trace-car, .unreal, .meta-quest, .df-lab, .map {
+    margin: 1rem auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;    /* 横方向を中央 */
+    justify-content: center;
+}
+
+.about, .contents-2, .map {
+    scroll-margin-top: 3rem;
+}
+
+/*--------------------text--------------------*/
+h1 {
+    margin: 0.5rem 1rem;
+    font-size: 1.5rem;
+    color: #6a22e6;
+    font-weight: 600;
+}
+header h1 {
+    font-size: 1rem;
+    font-weight: 400;
+    color: #ffffff;
+}
+h2 {
+    margin: 0 2rem;
+    font-size: 0.7rem;
+    color: #2e2e2e;
+    font-weight: 400;
+}
+h3 {
+    margin: 0;
+    padding: 0 1.5rem;
+    font-size: 2.5rem;
+    border-radius: 4px;
+    background-color: rgb(255, 247, 87);
+}
+.unreal h3, .meta-quest h3 {
+    background-color: rgb(93, 152, 255);
+}
+.df-lab h3 {
+    background-color: rgb(255, 87, 137);
+}
+p {
+    margin: 1.5rem 2rem;
+    color: #000000;
+    font-size: 0.8rem;
+    line-height: 2rem;
+    font-weight: 500;
+}
+.contents-2 h2, .contents-2 p {
+    color: #ffffff;
+}
+
+.title {
+    margin-top: 1rem;
+    display: flex;
+    justify-content: space-between;
+}
+
+.line{
+    margin: 2rem;
+    width: 90%;
+    height: 0.5px;
+    background-color: rgb(255, 255, 255);
+}
+
+.highlight{
+    font-size: 1.5rem;
+    font-weight: 300;
+    color: #ffffff;
+}
+
+/*--------------------display--------------------*/
+.display {
+    z-index: 20;
+    padding: 50px 0 0 0; /* 上に余裕を持たせる */
+    position: relative;
+}
+.display h1 {
+    padding: 30px;
+    color: white;
+    font-size: 2.5rem;
+    text-align: left;
+    margin-bottom: 2rem;
+}
+.display h1 small {
+    font-size: 1rem;
+    display: block;
+    margin-top: 0.5rem;
+    font-weight: 300;
+}
+    
+/*--------------------poster--------------------*/
+    .poster-container {
+        position: relative;
+        margin: 0 auto;
+        padding: 100px 0;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        gap: 20px;
+        background: linear-gradient(to top, rgb(237, 237, 237) 0%, rgba(255,255,255,0));
+    }
+
+    /* ビューポート：最大幅を指定しつつレスポンシブ対応 */
+    .poster-viewport {
+        width: min(940px, 100%);
+        max-width: 100%;
+        overflow: visible;
+        box-sizing: border-box;
+        margin: 0 auto;
+    }
+
+    /* トラック（横並び） */
+    .slider-track {
+        display: flex;
+        align-items: center;
+
+        transition: transform 320ms cubic-bezier(.22,.9,.31,1);
+        will-change: transform;
+    }
+    .slider-track img.poster {
+        width: 300px;
+        height: 100px;
+        object-fit: cover;
+        border-radius: 6px;
+        margin-right: 20px;
+        flex: 0 0 auto;
+        cursor: pointer; /* 追加: クリック可能表示 */
+    }
+
+    /*--------------------information--------------------*/
+    .information{
+        background-color: #ffffff;
+        width: 80%;
+        max-width: 700px;
+        padding: 0.5rem;
+    }
+    .information h1, .information h3, .information h2, .information p {
+        margin: 0.2rem 1rem;
+        color: #000000;
+        background-color: rgb(255, 255, 255);
+    }
+    .information h3{
+        font-size: 1rem;
+        text-align: right;
+    }
+
+    /* リンクを黒にしてボーダー/下線を消す */
+    .contents-1 a, .information a {
+        color: #000 !important;
+        text-decoration: none !important; /* 下線を消す */
+        border: none !important;           /* ボーダーがある場合は消す */
+        background-image: none !important; /* 下線を background で作っている場合に備え */
+        cursor: pointer;
+    }
+
+    /* 状態別の色を統一（任意） */
+    .contents-1 a:visited,
+    .information a:visited { color: #000 !important; }
+    .contents-1 a:hover,
+    .information a:hover { color: #000 !important; }
+
+
+    /*--------------------stamp-rally--------------------*/
+    .stamp-icon{
+        height: 35px;
+        padding: 1rem 0;
+    }
+
+    /*---------------------about--------------------*/
+    .denkon-kun{
+        display: block;
+        margin: 0 auto;
+        height: 200px;
+    }
+
+    /*---------------------exhibits--------------------*/
+    .exhibits-image{
+        margin: 1rem;
+        height: 300px;
+        border-radius: 10px;
+    }
+
+    .explanation {
+        margin: 0 2rem;
+        padding: 1rem 0;
+        background-color: rgb(38, 38, 38);
+        text-align: center;
+    }
+
+    /*---------------------map--------------------*/
+    .map-image{
+        margin: 1rem;
+        height: 400px;
+        border-radius: 10px;
+    }
+
+/*--------------------animetion--------------------*/
+.slide-in {
+    transform: translateY(30px);
+    opacity: 0;
+    transition: transform 560ms cubic-bezier(.22,.9,.31,1), opacity 420ms ease;
+    will-change: transform, opacity;
+    /* 見た目崩れを防ぐための軽い初期設定 */
+    pointer-events: none;
+}
+.slide-in.in-view {
+    transform: translateY(0);
+    opacity: 1;
+    pointer-events: auto;
+}
+
+/*--------------------footer--------------------*/
+footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem;
+    height: 80px;
+
+    background-color: rgb(139, 139, 139);
+    font-family: 'Courier New', monospace;
+    font-size: 0.5rem;
+    text-align: center;
+    color: #ffffff;
+}
