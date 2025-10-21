@@ -12,19 +12,25 @@ document.addEventListener("DOMContentLoaded", () => {
 document.addEventListener('DOMContentLoaded', () => {
   const container = document.querySelector('.poster-container');
   if (!container) return;
+
   const originals = Array.from(container.querySelectorAll('img.poster'));
   if (originals.length < 3) return;
 
   const items = originals.map(p => ({ src: p.src, alt: p.alt }));
-  const VISIBLE = 3, GAP = 20;
+  const VISIBLE = 3,GAP = 20;
   const half = Math.floor(VISIBLE / 2);
 
+  // 元画像を削除して構造を再構築
   container.innerHTML = '';
-  const viewport = document.createElement('div'); viewport.className = 'poster-viewport';
-  const track = document.createElement('div'); track.className = 'slider-track';
+  const viewport = document.createElement('div');
+  viewport.className = 'poster-viewport';
+  const track = document.createElement('div');
+  track.className = 'slider-track';
 
+  // 無限ループ用の前後追加
   const prepend = items.slice(-VISIBLE), append = items.slice(0, VISIBLE);
   const loop = [...prepend, ...items, ...append];
+
   loop.forEach(it => {
     const img = document.createElement('img');
     img.className = 'poster';
@@ -40,11 +46,17 @@ document.addEventListener('DOMContentLoaded', () => {
   const real = items.length;
   let idx = VISIBLE + half; // 中央を指すインデックス
 
-  const setT = on => track.style.transition = on ? 'transform .32s cubic-bezier(.22,.9,.31,1)' : 'none';
+  // トランジションのON/OFF切替
+  const setTransition = (on) => {
+    track.style.transition = on
+      ? 'transform .32s cubic-bezier(.22,.9,.31,1)'
+      : 'none';
+  };
 
+  // 表示を更新
   const update = (anim = true) => {
     if (!posters.length) return;
-    const w = posters[0].getBoundingClientRect().width;
+    const w = posters[0].offsetWidth;
     const slide = w + GAP;
     const viewportW = viewport.clientWidth;
     setT(anim);
@@ -64,30 +76,24 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   };
 
-  // ビューポート中心とクリック位置を比較して左右移動（1ステップ）
+  // ビューポートのクリックで左右に移動
   viewport.addEventListener('click', (e) => {
     const img = e.target.closest('img.poster');
     if (!img) return;
+
     const vpRect = viewport.getBoundingClientRect();
     const vpCenterX = vpRect.left + vpRect.width / 2;
     const clickedRect = img.getBoundingClientRect();
     const clickedCenterX = clickedRect.left + clickedRect.width / 2;
 
-    // クリックがビューポート中央付近なら無視
-    const tolerance = 8; // 中央判定の余裕(px)
+    const tolerance = 8; // 中央クリックの許容範囲(px)
     if (Math.abs(clickedCenterX - vpCenterX) <= tolerance) return;
 
-    if (clickedCenterX > vpCenterX) {
-      // 右側クリック -> 右へ（中央の次に進む）
-      idx = Math.min(idx + 1, posters.length - 1);
-    } else {
-      // 左側クリック -> 左へ
-      idx = Math.max(idx - 1, 0);
-    }
+    idx += clickedCenterX > vpCenterX ? 1 : -1;
     update(true);
   });
 
-  // トランジション終了でクローン境界を補正
+  // トランジション終了時のループ補正
   track.addEventListener('transitionend', () => {
     const leftIndex = idx - half;
     if (leftIndex < VISIBLE) {
@@ -99,6 +105,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
+  // 初期表示
   window.addEventListener('load', () => update(false));
   window.addEventListener('resize', () => update(false));
   setTimeout(() => update(false), 50);
