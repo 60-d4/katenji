@@ -2,6 +2,9 @@
 <html lang="ja">
 <head>
   <meta charset="UTF-8">
+  
+        <meta content="width=device-width, initial-scale=1.0,
+        minimum-scale=1.0, maximum-scale=1.0">
   <title>スタンプ取得中...</title>
   <script>
     const TEST_MODE = true; // ← true の間は何回でもスタンプ取得OK！
@@ -31,7 +34,7 @@
       document.body.textContent = `🎉 スタンプ「${spot}」をゲットしました！`;
 
       // GASに記録
-      await fetch("https://script.google.com/macros/s/AKfycbzo2SEH8Oa2sXuxtFPJIm6P1Zt-JQnEFuzHSenNZB4gLi3vv4xsKKYgODZLeFHuS2iX_g/exec", {
+      await fetch("https://script.google.com/macros/s/AKfycbzrcTtzMZvswUeK5X1bCnZIlXZ7ta0DKylpTqNzTKsvKfL-kFObnoIxIbrlVtlk0qpJCw/exec", {
         method: "POST",
         body: JSON.stringify({
           spot,
