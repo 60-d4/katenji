@@ -4,80 +4,78 @@ html {
 
 /*--------------------header--------------------*/
 header {
+    box-sizing: border-box; /* パディングを含む */
+    position: fixed; /* 固定 */
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0.75rem 1rem;
-    position: fixed; /* 固定 */
-    top: 0;
-    left: 0;
-    right: 0;
     z-index: 1000;
 
+    width: 100%;
+    padding: 0.3rem 1rem;
+    color: #ffffff;
     background: linear-gradient(to bottom, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0));
     backdrop-filter: blur(1px);
-
-    color: #ffffff;
 }
 header::after {
-  content: "";
+  pointer-events: none;
   position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
-  bottom: 0;
+  content: "";
+
   width: 90%;
   height: 1px;
+  bottom: 0;
   background-color: rgba(255,255,255);
-  pointer-events: none;
 }
-
+.icon { 
+    height: 1.5rem; 
+}
 .menu-icon {
-  font-size: 2rem;
   cursor: pointer;
   user-select: none;
   z-index: 1001;
+  font-size: 1.5rem;
 }
 
 /* --- メニューバー --- */
 .menu {
-    padding-top: 2.5rem;
     position: fixed;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    z-index: 1000;
+
+    padding-top: 2.5rem;
     right: 0;
     top: -250px; /* 初期は非表示（右に隠す） */
     width: 150px;
     background-color: #1111118f;
     color: #fff;
+
     transition: top 0.3s ease;
-    z-index: 1000;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
 }
 
 /* メニュー内のリンク */
 .menu ul {
   list-style: none;
+  text-align: center;
   padding: 0;
   margin: 0;
-  text-align: center;
 }
 
 .menu li {
   margin: 20px 0;
 }
 .menu a {
-  color: #fff;
   text-decoration: none;
-  font-size: 1rem;
   transition: color 0.3s;
+  color: #fff;
+  font-size: 1rem;
 }
 .menu.open {
   top: 0;
 }
 
-.icon{
-    height: 35px;
-}
 
 /*--------------------全体設定（背景/配置）--------------------*/
 body{
@@ -91,22 +89,24 @@ body{
 .main {
     background: url("images/unreal_kosen.png");
     background-size: cover;
+    background-attachment: fixed;
 }
 .contents-1, .contents-2 {
-    max-width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
 
-    background-attachment: fixed;
     background-position: center top;
 }
-.contents-1 {background-color: rgb(237, 237, 237);}
+.contents-1 { 
+    background-color: rgb(237, 237, 237);
+}
 .contents-2 {
-  background-image: url("images/bg-1.png");
-  background-repeat: repeat;        /* 横方向にタイル */
-  background-size: 600px auto;        /* タイル幅を固定（必要なら調整） */
-  background-attachment: scroll;      /* fixed を解除して安定させる */}
+    background-image: url("images/bg-1.png");
+    background-repeat: repeat;
+    background-size: 600px auto;
+    background-attachment: fixed;
+}
 
 .contents-1 section, .contents-2 section {
     margin: 0 auto;
@@ -131,23 +131,24 @@ h1 {
     margin: 0.5rem 1rem;
     font-size: 1.5rem;
     color: #6a22e6;
-    font-weight: 600;
+    font-weight: 500;
 }
 header h1 {
-    font-size: 1rem;
-    font-weight: 400;
+    margin: 0;
     color: #ffffff;
+    font-size: 0.5rem;
+    font-weight: 400;
 }
 h2 {
     margin: 0 2rem;
-    font-size: 0.7rem;
-    color: #2e2e2e;
+    font-size: 0.5rem;
+    color: #3f3f3f;
     font-weight: 400;
 }
 h3 {
     margin: 0;
     padding: 0 1.5rem;
-    font-size: 2.5rem;
+    font-size: 2rem;
     border-radius: 4px;
     background-color: rgb(255, 247, 87);
 }
@@ -160,12 +161,18 @@ h3 {
 p {
     margin: 1.5rem 2rem;
     color: #000000;
-    font-size: 0.8rem;
-    line-height: 2rem;
+    font-size: 0.7rem;
+    line-height: 1.5rem;
     font-weight: 500;
 }
 .contents-2 h2, .contents-2 p {
     color: #ffffff;
+}
+h4 {
+    margin: 0 0 1rem 0;
+    font-size: 0.8rem;
+    color: #4a405d;
+    font-weight: 500;
 }
 
 .title {
@@ -182,138 +189,141 @@ p {
 }
 
 .highlight{
-    font-size: 1.5rem;
+    font-size: 1.2rem;
     font-weight: 300;
     color: #ffffff;
 }
 
 /*--------------------display--------------------*/
 .display {
-    z-index: 20;
-    padding: 50px 0 0 0; /* 上に余裕を持たせる */
     position: relative;
+    z-index: 20;
+
+    padding: 50px 0 0 0; /* 上に余裕を持たせる */
 }
 .display h1 {
-    padding: 30px;
-    color: white;
-    font-size: 2.5rem;
     text-align: left;
-    margin-bottom: 2rem;
+    padding: 1rem 3rem 0 3rem;
+    margin: 0;
+
+    font-size: 2rem;
+    color: white;
 }
-.display h1 small {
-    font-size: 1rem;
-    display: block;
-    margin-top: 0.5rem;
+.display h2 {
+    padding: 0 3rem;
+    margin: 0;
+
+    font-size: 0.5rem;
     font-weight: 300;
+    color: white;
 }
     
 /*--------------------poster--------------------*/
-    .poster-container {
-        position: relative;
-        margin: 0 auto;
-        padding: 100px 0;
+.poster-container {
+    position: relative;
+    margin: 0;
+    padding: 9rem 0 3rem 0;
+    gap: 20px;
 
-        display: flex;
-        justify-content: center;
-        align-items: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
-        gap: 20px;
-        background: linear-gradient(to top, rgb(237, 237, 237) 0%, rgba(255,255,255,0));
-    }
+    background: linear-gradient(to top, rgb(237, 237, 237) 0%, rgba(255,255,255,0));
+}
 
-    /* ビューポート：最大幅を指定しつつレスポンシブ対応 */
-    .poster-viewport {
-        width: min(940px, 100%);
-        max-width: 100%;
-        overflow: visible;
-        box-sizing: border-box;
-        margin: 0 auto;
-    }
+/* ビューポート：最大幅を指定しつつレスポンシブ対応 */
+.poster-viewport {
+    width: min(940px, 100%);
+    max-width: 100%;
+    overflow: visible;
+    box-sizing: border-box;
+    margin: 0 auto;
+}
 
-    /* トラック（横並び） */
-    .slider-track {
-        display: flex;
-        align-items: center;
+/* トラック（横並び） */
+.slider-track {
+    display: flex;
+    align-items: center;
 
-        transition: transform 320ms cubic-bezier(.22,.9,.31,1);
-        will-change: transform;
-    }
-    .slider-track img.poster {
-        width: 300px;
-        height: 100px;
-        object-fit: cover;
-        border-radius: 6px;
-        margin-right: 20px;
-        flex: 0 0 auto;
-        cursor: pointer; /* 追加: クリック可能表示 */
-    }
+    transition: transform 320ms cubic-bezier(.22,.9,.31,1);
+    will-change: transform;
+}
+.slider-track img.poster {
+    cursor: pointer;
+    flex: 0 0 auto;
+    object-fit: cover;
+    margin-right: 20px;
 
-    /*--------------------information--------------------*/
-    .information{
-        background-color: #ffffff;
-        width: 80%;
-        max-width: 700px;
-        padding: 0.5rem;
-    }
-    .information h1, .information h3, .information h2, .information p {
-        margin: 0.2rem 1rem;
-        color: #000000;
-        background-color: rgb(255, 255, 255);
-    }
-    .information h3{
-        font-size: 1rem;
-        text-align: right;
-    }
+    width: 60%;
+    height: 100px;
+    border-radius: 4px;
+}
 
-    /* リンクを黒にしてボーダー/下線を消す */
-    .contents-1 a, .information a {
-        color: #000 !important;
-        text-decoration: none !important; /* 下線を消す */
-        border: none !important;           /* ボーダーがある場合は消す */
-        background-image: none !important; /* 下線を background で作っている場合に備え */
-        cursor: pointer;
-    }
+/*--------------------information--------------------*/
+.information{
+    background-color: #ffffff;
+    width: 80%;
+    max-width: 700px;
+    padding: 0.5rem;
+}
+.information h1, .information h3, .information h2, .information p {
+    margin: 0.2rem 1rem;
+    color: #000000;
+    background-color: rgb(255, 255, 255);
+}
+.information h3{
+    font-size: 1rem;
+    text-align: right;
+}
 
-    /* 状態別の色を統一（任意） */
-    .contents-1 a:visited,
-    .information a:visited { color: #000 !important; }
-    .contents-1 a:hover,
-    .information a:hover { color: #000 !important; }
+/* リンクを黒にしてボーダー/下線を消す */
+.contents-1 a, .information a {
+    color: #000 !important;
+    text-decoration: none !important; /* 下線を消す */
+    border: none !important;           /* ボーダーがある場合は消す */
+    background-image: none !important; /* 下線を background で作っている場合に備え */
+    cursor: pointer;
+}
+
+/* 状態別の色を統一（任意） */
+.contents-1 a:visited,
+.information a:visited { color: #000 !important; }
+.contents-1 a:hover,
+.information a:hover { color: #000 !important; }
 
 
-    /*--------------------stamp-rally--------------------*/
-    .stamp-icon{
-        height: 35px;
-        padding: 1rem 0;
-    }
+/*--------------------stamp-rally--------------------*/
+.stamp-icon{
+    height: 35px;
+    padding: 1rem 0;
+}
 
-    /*---------------------about--------------------*/
-    .denkon-kun{
-        display: block;
-        margin: 0 auto;
-        height: 200px;
-    }
+/*---------------------about--------------------*/
+.denkon-kun{
+    display: block;
+    margin: 3rem auto;
+    width: 65%;
+}
 
-    /*---------------------exhibits--------------------*/
-    .exhibits-image{
-        margin: 1rem;
-        height: 300px;
-        border-radius: 10px;
-    }
+/*---------------------exhibits--------------------*/
+.exhibits-image{
+    margin: 1rem;
+    width: 65%;
+}
 
-    .explanation {
-        margin: 0 2rem;
-        padding: 1rem 0;
-        background-color: rgb(38, 38, 38);
-        text-align: center;
-    }
+.explanation {
+    margin: 0 2rem;
+    padding: 1rem 0;
+    background-color: rgb(38, 38, 38);
+    text-align: center;
+    border-radius: 4px;
+}
 
-    /*---------------------map--------------------*/
-    .map-image{
-        margin: 1rem;
-        height: 400px;
-        border-radius: 10px;
-    }
+/*---------------------map--------------------*/
+.map-image{
+    width: 80%;
+}
 
 /*--------------------animetion--------------------*/
 .slide-in {
