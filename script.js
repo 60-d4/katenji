@@ -59,7 +59,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const w = posters[0].offsetWidth;
     const slide = w + GAP;
     const viewportW = viewport.clientWidth;
-    setT(anim);
+    setTransition(anim);
     const leftIndex = idx - half;
     const translate = -(leftIndex * slide) + (viewportW - w) / 2;
     track.style.transform = `translateX(${translate}px)`;
@@ -77,7 +77,8 @@ document.addEventListener('DOMContentLoaded', () => {
   };
 
   // ビューポートのクリックで左右に移動
-  viewport.addEventListener('click', (e) => {
+['click', 'touchstart'].forEach(ev => {
+  viewport.addEventListener(ev, (e) => {
     const img = e.target.closest('img.poster');
     if (!img) return;
 
@@ -86,12 +87,13 @@ document.addEventListener('DOMContentLoaded', () => {
     const clickedRect = img.getBoundingClientRect();
     const clickedCenterX = clickedRect.left + clickedRect.width / 2;
 
-    const tolerance = 8; // 中央クリックの許容範囲(px)
+    const tolerance = 8;
     if (Math.abs(clickedCenterX - vpCenterX) <= tolerance) return;
 
     idx += clickedCenterX > vpCenterX ? 1 : -1;
     update(true);
-  });
+  }, { passive: true });
+});
 
   // トランジション終了時のループ補正
   track.addEventListener('transitionend', () => {
