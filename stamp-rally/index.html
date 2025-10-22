@@ -1,69 +1,58 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-  <meta charset="UTF-8">
-        <meta content="width=device-width, initial-scale=1.0,
-        minimum-scale=1.0, maximum-scale=1.0">
-  <title>スタンプラリー</title>
-  <style>
-    body {
-      font-family: sans-serif;
-      text-align: center;
-      background: #f0f8ff;
-      padding: 2rem;
-    }
-    .stamp {
-      width: 120px;
-      height: 120px;
-      margin: 1rem;
-      border: 3px dashed #aaa;
-      border-radius: 50%;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      background-color: #fff;
-      font-size: 1.2rem;
-    }
-    .got {
-      border: 3px solid #4caf50;
-      background-color: #c8f7c5;
-      color: #2e7d32;
-      font-weight: bold;
-    }
-    .stamp img {
-    width: 100px;
-    height: 100px;
-    object-fit: cover;
-    border-radius: 50%;
-    opacity: 0.3; /* 未取得のときは薄く表示 */
-    transition: opacity 0.3s ease;
-    }
-    .got img {
-    opacity: 1; /* 取得済みならはっきり表示 */
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0">
+    <title>D4科展示スタンプラリー</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <h1>電子工学科 スタンプラリー</h1>
-  <p>QRコードを読み取ってスタンプを集めよう！</p>
+  <header>
+    <a href="../index.html" class="return-button">
+      <div class="return">↩ 電子工学科ホームページに戻る</div>
+    </a>
+  </header>
+  <main>
+    <h1>D4科展示</h1>
+    <h2>スタンプラリー</h2>
+    <p>スタンプをぜんぶあつめたら<br>おたのしみギフトがもらえるよ！</p>
 
-  <div id="stamps">
-  <div class="stamp" id="stampA">
-  </div>
-  <div class="stamp" id="stampB">
-  </div>
-</div>
+    <div class="stamp-area">
+      <div class="stamp">
+        <img src="stamp1.png" alt="基礎実験室のスタンプ">
+        <p>1F基礎実験室</p>
+      </div>
+      <div class="stamp">
+        <img src="stamp2.png" alt="電子制御実験室のスタンプ">
+        <p>2F電子制御実験室</p>
+      </div>
+      <div class="stamp">
+        <img src="stamp3.png" alt="おんちゃ処のスタンプ">
+        <p>D4 おんちゃ処</p>
+      </div>
+    </div>
 
-  <p id="message"></p>
+    <div class="qr-text">QRコードを読み取ってスタンプを集めよう</div>
+
+    <!-- ★ ふき出し部分 -->
+    <div class="bonus-bubble">
+      🎁 D4 おんちゃ処でスタンプを押すと<br>さらにお菓子がもらえるよ！
+    </div>
+
+  </main>
+
+  <footer>
+    <p>© 2024 電子工学科4年</p>
+  </footer>
 
   <script>
     // 保存済みデータを取得
     const stamps = JSON.parse(localStorage.getItem("stamps") || "{}");
 
-    if (stamps.A) document.getElementById("stampA").classList.add("got");
-    if (stamps.B) document.getElementById("stampB").classList.add("got");
+    if (stamps.kisojikken) document.getElementById("stamp_kisojikken").classList.add("got");
+    if (stamps.denshiseigyo) document.getElementById("stamp_denshiseigyo").classList.add("got");
 
-    if (stamps.A && stamps.B) {
+    if (stamps.kisojikken && stamps.denshiseigyo) {
     document.getElementById("message").textContent = "🎉 全スタンプコンプリート！";
     }
   </script>

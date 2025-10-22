@@ -2,16 +2,13 @@
 <html lang="ja">
 <head>
   <meta charset="UTF-8">
-  
-        <meta content="width=device-width, initial-scale=1.0,
-        minimum-scale=1.0, maximum-scale=1.0">
-  <title>スタンプ取得中...</title>
+  <title>now Lowding...</title>
   <script>
-    const TEST_MODE = true; // ← true の間は何回でもスタンプ取得OK！
+    const TEST_MODE = true; // ← true の間は何回でもスタンプ取得
 
     async function getStamp() {
       const params = new URLSearchParams(location.search);
-      const spot = params.get("spot"); // A または B
+      const spot = params.get("spot"); // スタンプスポットIDを取得
 
       if (!spot) {
         document.body.textContent = "エラー：無効なURLです。";
@@ -31,7 +28,7 @@
       stamps[spot] = new Date().toISOString();
       localStorage.setItem("stamps", JSON.stringify(stamps));
 
-      document.body.textContent = `🎉 スタンプ「${spot}」をゲットしました！`;
+      document.body.textContent = `now Lowding...`;
 
       // GASに記録
       await fetch("https://script.google.com/macros/s/AKfycbzrcTtzMZvswUeK5X1bCnZIlXZ7ta0DKylpTqNzTKsvKfL-kFObnoIxIbrlVtlk0qpJCw/exec", {
@@ -48,7 +45,7 @@
       });
 
       // 数秒後に台紙へ戻る
-      setTimeout(() => location.href = "index.html", 2000);
+      setTimeout(() => location.href = "index.html", 500);
     }
 
     window.onload = getStamp;
