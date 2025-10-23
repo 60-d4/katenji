@@ -31,16 +31,15 @@
       document.body.textContent = `now Lowding...`;
 
       // GASに記録
-      await fetch("https://script.google.com/macros/s/AKfycbzrcTtzMZvswUeK5X1bCnZIlXZ7ta0DKylpTqNzTKsvKfL-kFObnoIxIbrlVtlk0qpJCw/exec", {
+      await fetch("https://script.google.com/macros/s/AKfycbzoXW9CmzR69jF-KWx03sm3bG9W3fj43Sz4qHE5DjYm5VlkwT9-uzfYYcoycwOvFOCXJA/exec", {
         method: "POST",
         body: JSON.stringify({
-          spot,
-          timestamp: new Date().toLocaleString(),
           clientId: localStorage.getItem("clientId") || (() => {
             const id = crypto.randomUUID();
             localStorage.setItem("clientId", id);
             return id;
-          })()
+          })(),
+          spot
         })
       });
 
