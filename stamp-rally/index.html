@@ -15,29 +15,34 @@
   <main>
     <h1>D4科展示</h1>
     <h2>スタンプラリー</h2>
-    <p>スタンプをぜんぶあつめたら<br>おたのしみギフトがもらえるよ！</p>
+    <p>2つの実験室のスタンプを集めると<br>お菓子がもらえるよ！</p>
 
     <div class="stamp-area">
       <div class="stamp">
-        <img src="../images/stamp_1.png" alt="基礎実験室のスタンプ">
+        <img src="../images/stamp_1.png" alt="基礎実験室のスタンプ" id="stamp_1">
         <p>1F基礎実験室</p>
       </div>
       <div class="stamp">
-        <img src="../images/stamp_2.png" alt="電子制御実験室のスタンプ">
+        <img src="../images/stamp_2.png" alt="電子制御実験室のスタンプ" id="stamp_2">
         <p>2F電子制御実験室</p>
-      </div>
-      <div class="stamp">
-        <img src="../images/stamp_3.png" alt="おんちゃ処のスタンプ">
-        <p>D4 おんちゃ処</p>
       </div>
     </div>
 
     <div class="qr-text">QRコードを読み取ってスタンプを集めよう</div>
 
+    <div class="stamp-area">
+      <div class="stamp">
+        <img src="../images/stamp_3.png" alt="おんちゃ処のスタンプ" id="stamp_3">
+        <p>D4 おんちゃ処</p>
+      </div>
+    </div>
+
     <!-- ★ ふき出し部分 -->
     <div class="bonus-bubble">
-      🎁 D4 おんちゃ処でスタンプを押すと<br>さらにお菓子がもらえるよ！
+      🎁 D4模擬店 おんちゃ処でスタンプを押すと<br>さらにお菓子がもらえるよ！
     </div>
+
+    <p>スタンプが集まったら<br>実験室でお菓子を受け取ってね！</p>
 
   </main>
 
@@ -46,15 +51,25 @@
   </footer>
 
   <script>
+    window.addEventListener("DOMContentLoaded", () => {
     // 保存済みデータを取得
     const stamps = JSON.parse(localStorage.getItem("stamps") || "{}");
 
-    if (stamps.kisojikken) document.getElementById("stamp_kisojikken").classList.add("got");
-    if (stamps.denshiseigyo) document.getElementById("stamp_denshiseigyo").classList.add("got");
+    // 取得済みスタンプにクラスを追加
+    if (stamps.kisojikken) document.getElementById("stamp_1").classList.add("got");
+    if (stamps.denshiseigyo) document.getElementById("stamp_2").classList.add("got");
+    if (stamps.ontya) document.getElementById("stamp_3").classList.add("got");
 
-    if (stamps.kisojikken && stamps.denshiseigyo) {
-    document.getElementById("message").textContent = "🎉 全スタンプコンプリート！";
+    // 全部揃ったらメッセージを表示
+    if (stamps.kisojikken && stamps.denshiseigyo && stamps.ontya) {
+      const msg = document.createElement("p");
+      msg.textContent = "🎉 おめでとう！ 全スタンプコンプリート！";
+      msg.style.fontWeight = "bold";
+      msg.style.fontSize = "1.2rem";
+      msg.style.marginTop = "1rem";
+      document.querySelector("main").appendChild(msg);
     }
+  });
   </script>
 </body>
 </html>

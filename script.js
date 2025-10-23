@@ -76,9 +76,15 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   };
 
-  // ビューポートのクリックで左右に移動
+// ビューポートのクリックで左右に移動
+let lastActionTime = 0;
+
 ['click', 'touchstart'].forEach(ev => {
   viewport.addEventListener(ev, (e) => {
+    const now = Date.now();
+    if (now - lastActionTime < 400) return; // 0.4秒以内の重複を無視
+    lastActionTime = now;
+
     const img = e.target.closest('img.poster');
     if (!img) return;
 
@@ -94,6 +100,7 @@ document.addEventListener('DOMContentLoaded', () => {
     update(true);
   }, { passive: true });
 });
+
 
   // トランジション終了時のループ補正
   track.addEventListener('transitionend', () => {

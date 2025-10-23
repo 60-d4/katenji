@@ -2,8 +2,9 @@ body {
     margin: 0;
     padding: 0;
     font-family: 'Noto Sans JP', sans-serif;
-    background: linear-gradient(#6ec6ff, #3a8dde);
-    height: 100%;
+    background: linear-gradient(#9ad4fb, #4991d8);
+    background-attachment: fixed;
+    height: 100vh;
     color: white;
     text-align: center;
 }
@@ -66,7 +67,7 @@ p {
     box-shadow: 0 0 10px rgba(0,0,0,0.2);
     transition: 0.3s;
 
-    margin-bottom: 60px;
+    margin: 2rem 0;
 }
 
 .stamp:hover {
@@ -76,7 +77,11 @@ p {
 .stamp img {
     width: 150px;
     height: auto;
-    opacity: 0.5;
+    opacity: 0;
+}
+.got {
+    opacity: 1 !important;
+    transition: opacity 0.5s ease;
 }
 
 .stamp p {
@@ -86,7 +91,7 @@ p {
 }
 
 .qr-text {
-    margin-top: 40px;
+    margin-top: 1rem;
     font-size: 1rem;
     background: rgba(255,255,255,0.2);
     display: inline-block;
@@ -98,7 +103,7 @@ p {
 .bonus-bubble {
     position: relative;
     display: inline-block;
-    margin-top: 40px;
+    margin-top: 2rem;
     padding: 16px 24px;
     background: #fff;
     color: #3a8dde;
@@ -120,7 +125,7 @@ p {
 }
 
 footer {
-    margin: 2rem 0;
+    padding: 1.5rem 0;
     opacity: 0.8;
 }
 footer p {
