@@ -87,7 +87,9 @@ body{
     font-family: "Noto Sans JP", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", "Hiragino Kaku Gothic ProN", "Meiryo", sans-serif;
 }
 .main {
-    background-size: 100% auto;
+    background-size: contain;
+    padding: 0;
+    background-repeat: no-repeat;
     background-attachment: fixed;
 }
 .contents-1, .contents-2 {
