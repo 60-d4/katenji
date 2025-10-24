@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <title>now Lowding...</title>
   <script>
-    const TEST_MODE = true; // ← true の間は何回でもスタンプ取得
+    const TEST_MODE = false;
 
     async function getStamp() {
       const params = new URLSearchParams(location.search);
@@ -20,7 +20,7 @@
 
       // すでに取得済みならスキップ（ただしテストモード時は無視）
       if (!TEST_MODE && stamps[spot]) {
-        document.body.textContent = `スタンプ「${spot}」はすでに取得済みです。`;
+        document.body.textContent = `スタンプはすでに取得済みです。`;
         return;
       }
 
@@ -28,7 +28,7 @@
       stamps[spot] = new Date().toISOString();
       localStorage.setItem("stamps", JSON.stringify(stamps));
 
-      document.body.textContent = `now Lowding...`;
+      document.body.textContent = `now Lowding...そのままお待ちください。`;
 
       // GASに記録
       await fetch("https://script.google.com/macros/s/AKfycbzoXW9CmzR69jF-KWx03sm3bG9W3fj43Sz4qHE5DjYm5VlkwT9-uzfYYcoycwOvFOCXJA/exec", {
@@ -43,8 +43,8 @@
         })
       });
 
-      // 数秒後に台紙へ戻る
-      setTimeout(() => location.href = "index.html", 500);
+      // 台紙へ戻る
+      location.href = "index.html";
     }
 
     window.onload = getStamp;

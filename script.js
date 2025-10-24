@@ -70,8 +70,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const mainSection = document.querySelector('.main');
     if (mainSection) {
       mainSection.style.backgroundImage = `url(${currentSrc})`;
-      mainSection.style.backgroundSize = 'cover';
-      mainSection.style.backgroundPosition = 'center';
+      mainSection.style.backgroundSize = 'contain';
       mainSection.style.transition = 'background-image 0.6s ease-in-out';
     }
   };
