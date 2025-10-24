@@ -98,9 +98,30 @@ let lastActionTime = 0;
 
     idx += clickedCenterX > vpCenterX ? 1 : -1;
     update(true);
+    restartAutoSlide(); // 操作後は自動スライドをリセット
   }, { passive: true });
 });
 
+// === 自動スライド機能 ===
+  let autoSlideTimer = null;
+  const AUTO_INTERVAL = 4000; // 3秒ごとにスライド
+
+  const startAutoSlide = () => {
+    stopAutoSlide();
+    autoSlideTimer = setInterval(() => {
+      idx++;
+      update(true);
+    }, AUTO_INTERVAL);
+  };
+
+  const stopAutoSlide = () => {
+    if (autoSlideTimer) clearInterval(autoSlideTimer);
+  };
+
+  const restartAutoSlide = () => {
+    stopAutoSlide();
+    setTimeout(startAutoSlide, 4000); // 操作後4秒で再開
+  };
 
   // トランジション終了時のループ補正
   track.addEventListener('transitionend', () => {
@@ -115,7 +136,10 @@ let lastActionTime = 0;
   });
 
   // 初期表示
-  window.addEventListener('load', () => update(false));
+  window.addEventListener('load', () => {
+    update(false);
+    startAutoSlide(); // 自動スライド開始
+  });
   window.addEventListener('resize', () => update(false));
   setTimeout(() => update(false), 50);
 });

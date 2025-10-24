@@ -1,6 +1,7 @@
 body {
     margin: 0;
     padding: 0;
+    width: 100%;
     font-family: 'Noto Sans JP', sans-serif;
     background: linear-gradient(#9ad4fb, #4991d8);
     background-attachment: fixed;
@@ -54,13 +55,13 @@ p {
 .stamp-area {
     display: flex;
     justify-content: center;
-    gap: 40px;
+    gap: 2rem;
     flex-wrap: wrap;
 }
 
 .stamp {
-    width: 150px;
-    height: 150px;
+    width: 8rem;
+    height: 8rem;
     border-radius: 50%;
     background-color: rgba(255,255,255,0.2);
     
@@ -75,7 +76,7 @@ p {
 }
 
 .stamp img {
-    width: 150px;
+    width: 8rem;
     height: auto;
     opacity: 0;
 }
